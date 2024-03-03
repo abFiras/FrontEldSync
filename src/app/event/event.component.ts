@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Event } from '../model/event';
 import { EventService } from '../service/event.service';
 
@@ -9,6 +10,7 @@ import { EventService } from '../service/event.service';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
+
   events: Event[] = [];
   eventForm!: FormGroup;
 
@@ -18,11 +20,13 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     this.getEvents();
     this.initEventForm();
+
   }
 
   getEvents(): void {
     this.eventService.retrieveAllEvents().subscribe(events => this.events = events);
   }
+
 
   initEventForm(): void {
     this.eventForm = this.formBuilder.group({
@@ -74,4 +78,5 @@ export class EventComponent implements OnInit {
 
 
   }
+
 }

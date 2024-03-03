@@ -1,4 +1,5 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from '../model/event';
@@ -10,6 +11,7 @@ import { EventStatus } from '../model/event-status';
   providedIn: 'root'
 })
 export class EventService {
+  
   private apiUrl = 'http://localhost:8081/api/EldSync/Event';
   private userApiUrl = 'http://localhost:8081/api/users';
 
@@ -74,6 +76,8 @@ export class EventService {
   public getUpcomingEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.apiUrl}/upcoming`);
   }
+
+
 
   public getPastEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.apiUrl}/past`);
