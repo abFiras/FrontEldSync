@@ -1,10 +1,8 @@
-<!-- event.component.html -->
+<div class="container mt-2">
+  <h1>Event List</h1>
 
-<!-- Header or other content -->
-<h1>Event List</h1>
+<table class="table table-bordered">
 
-<!-- Table to display events -->
-<table class="table">
   <thead>
     <tr>
       <th>ID</th>
@@ -15,6 +13,8 @@
       <th>Location</th>
       <th>Price</th>
       <th>Status</th>
+      <th>Action</th>
+
     </tr>
   </thead>
   <tbody>
@@ -27,8 +27,81 @@
       <td>{{ event.location }}</td>
       <td>{{ event.price | currency }}</td>
       <td>{{ event.status }}</td>
+      <button class="btn btn-danger" (click)="deleteEvent(event.idEvent)">Delete</button>
+
+
     </tr>
   </tbody>
 </table>
 
-<!-- Footer or other content -->
+
+
+  <div class="mt-4 mb-4"></div>
+  <div class="mt-4 mb-4"></div>
+  <div class="mt-4 mb-4"></div>
+
+  <form *ngIf="eventForm" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Name:</label>
+    <div class="col-sm-10">
+      <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter event name">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label">Description:</label>
+    <div class="col-sm-10">
+      <textarea id="description" class="form-control" formControlName="description" placeholder="Enter event description"></textarea>
+    </div>
+  </div>
+
+    <div class="form-group row">
+      <label for="banner" class="col-sm-2 col-form-label">Banner:</label>
+      <div class="col-sm-10">
+        <input type="text" id="banner" class="form-control" formControlName="banner" placeholder="Enter event banner URL">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="date" class="col-sm-2 col-form-label">Date:</label>
+      <div class="col-sm-10">
+        <input type="date" id="date" class="form-control" formControlName="date">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="category" class="col-sm-2 col-form-label">Category:</label>
+      <div class="col-sm-10">
+        <input type="text" id="category" class="form-control" formControlName="category" placeholder="Enter event category">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="location" class="col-sm-2 col-form-label">Location:</label>
+      <div class="col-sm-10">
+        <input type="text" id="location" class="form-control" formControlName="location" placeholder="Enter event location">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="price" class="col-sm-2 col-form-label">Price:</label>
+      <div class="col-sm-10">
+        <input type="number" id="price" class="form-control" formControlName="price" placeholder="Enter event price">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="status" class="col-sm-2 col-form-label">Status:</label>
+      <div class="col-sm-10">
+        <input type="text" id="status" class="form-control" formControlName="status" placeholder="Enter event status">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-10 offset-sm-2">
+        <button type="submit" class="btn btn-primary">Add Event</button>
+      </div>
+    </div>
+  </form>
+</div>
+

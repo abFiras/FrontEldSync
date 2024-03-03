@@ -1,34 +1,47 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from '../model/event';
 import { EventStatus } from '../model/event-status';
+
 //import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:8080/api/events';
-  private userApiUrl = 'http://localhost:8080/api/users';
+  
+  private apiUrl = 'http://localhost:8081/api/EldSync/Event';
+  private userApiUrl = 'http://localhost:8081/api/users';
 
   constructor(private http: HttpClient) {}
 
   public retrieveAllEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(this.apiUrl);
+    return this.http.get<Event[]>(`${this.apiUrl}/retrieveAllEvents`);
   }
 
   public addEvent(event: Event): Observable<Event> {
-    return this.http.post<Event>(this.apiUrl, event);
+    return this.http.post<Event>(`${this.apiUrl}/AddEvent`, event);
   }
+  public removeEvent(idEvent: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/removeEvent/${idEvent}`);
+  }
+
+
+
+
+
+
+
+
 
   public retrieveEvent(idEvent: number): Observable<Event> {
     return this.http.get<Event>(`${this.apiUrl}/${idEvent}`);
   }
 
-  public removeEvent(idEvent: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${idEvent}`);
-  }
+
+
 
   public suggestNewEvent(event: Event): Observable<Event> {
     event.status = EventStatus.PENDING;
@@ -63,6 +76,8 @@ export class EventService {
   public getUpcomingEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.apiUrl}/upcoming`);
   }
+
+
 
   public getPastEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.apiUrl}/past`);
